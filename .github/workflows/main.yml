@@ -1,35 +1,15 @@
-# Название твоего воркфлоу (отображается во вкладке Actions)
-name: My First CI
+name: Simple Echo Test
 
-# 1. КОГДА запускать? (Триггер)
 on:
   push:
-    branches: [ main, master ] # Запуск при пуше в ветки main или master
-  pull_request:
-    branches: [ main ]         # Запуск при создании PR в ветку main
+    branches: [ main ]
 
-# 2. ЧТО ДЕЛАТЬ? (Задачи)
 jobs:
-  build-and-test:
-    # На каком сервере запускать (обычно берут свежую Ubuntu)
+  say-hello:
     runs-on: ubuntu-latest
-
-    # Пошаговый рецепт
     steps:
-      # Шаг 1: Скачиваем код из репозитория на этот виртуальный сервер
-      - name: Check out repository code
-        uses: actions/checkout@v4
+      - name: Say Hello to Steve
+        run: echo "Привет, Стив! Твой CI/CD работает!"
 
-      # Шаг 2: Устанавливаем Node.js (это готовый Action с маркетплейса)
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # Шаг 3: Устанавливаем зависимости проекта
-      - name: Install dependencies
-        run: npm install
-
-      # Шаг 4: Запускаем тесты
-      - name: Run tests
-        run: npm test
+      - name: Print Date
+        run: date
